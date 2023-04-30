@@ -1,0 +1,28 @@
+.container {
+  width: 30%;
+  min-height: 200px;
+  padding: 5px;
+  /* border-radius: 10px; */
+}
+
+.clock {
+  width: 100%;
+  min-height: 150px;
+  text-align: center;
+  font-size: 9em;
+}
+
+.content {
+  flex-wrap: wrap;
+  grid-gap: 0px;
+}
+
+.greeting {
+  font-size: xx-large;
+}
+
+.tasks {
+  height: 100px;
+  background: rgb(234, 232, 232);
+  text-align: center;
+}
