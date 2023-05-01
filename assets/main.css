@@ -1,8 +1,21 @@
 .container {
-  width: 30%;
+  width: 60%;
   min-height: 200px;
   padding: 5px;
   /* border-radius: 10px; */
+}
+
+.reset-button {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .clock {
@@ -25,4 +38,112 @@
   height: 100px;
   background: rgb(234, 232, 232);
   text-align: center;
+}
+
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-list li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid #ccc;
+}
+
+.todo-item {
+  height: 30px;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 1.4em;
+}
+
+/* No wrap */
+.todo-item-text {
+  width: 50%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.todo-item-tags {
+  /* text-align: center; */
+  width: 30%;
+  display: flex;
+  align-items: center;
+}
+
+.priority {
+  background-color: #f44336;
+  padding: 2px 10px;
+  border-radius: 5px;
+  color: white;
+}
+.low {
+  background-color: #4caf50;
+}
+.medium {
+  background-color: #ff9800;
+}
+.high {
+  background-color: #f44336;
+}
+
+.todo-item-actions {
+  display: flex;
+  visibility: hidden;
+  align-items: center; 
+  gap: 10px;
+}
+
+.todo-item:hover .todo-item-actions {
+  visibility: visible;
+}
+
+.todo-item .delete-todo {
+  color: rgb(240, 109, 109);
+  cursor: pointer;
+}
+
+.todo-item .delete-todo:hover {
+  color: rgb(255, 0, 0);
+}
+
+.todo-item .edit-todo {
+  color: rgb(115, 140, 146);
+  cursor: pointer;
+  /* margin-top: 4px; */
+}
+
+
+
+.add-todo-form {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid #ccc;
+}
+
+.add-todo-priority {
+  display: flex;
+  padding: 5px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.add-todo-form input {
+  background-color: transparent;
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 1.5em;
 }

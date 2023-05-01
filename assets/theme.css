@@ -1,3 +1,16 @@
+body {
+  background-color: rgba(128, 128, 128, 0.187);
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .flex {
   display: flex;
 }
@@ -19,8 +32,9 @@
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
 }
+
 
 .content {
   position: fixed;

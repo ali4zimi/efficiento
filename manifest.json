@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Bahina",
+  "name": "Behina",
   "description": "Track your activity and increase your effeciency",
   "version": "1.0",
   "action": {
@@ -9,7 +9,7 @@
   },
 
   "chrome_url_overrides" : {
-    "newtab": "newTab.html"
+    "newtab": "index.html"
   },
   "permissions": [
     "storage"
