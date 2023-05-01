@@ -1,13 +1,20 @@
-// remove settings from chrome.storage;
-// chrome.storage.sync.remove('settings');
+// Description: This file contains the main javascript code for the extension
 
+// Get the elements from the DOM
+const clock = document.querySelector('.clock .time');
+const date = document.querySelector('.date');
+const greeting = document.querySelector('.greeting');
 const resetButton = document.querySelector('.reset-button');
+const todoList = document.querySelector('.todo-list');
+const addTodoForm = document.querySelector('.add-todo-form');
+const showDialogButton = document.querySelectorAll('.edit-todo');
+
+
+
 resetButton.addEventListener('click', () => {
   chrome.storage.sync.set({ settings: defaultSettings });
-
   // delete todos
   chrome.storage.sync.remove('todos');
-
   // reload the page
   window.location.reload();
 });
@@ -40,33 +47,44 @@ chrome.storage.sync.get().then(data => {
   }
   initializeTodoList();
   updateClock();
+  updateGreeting();
 });
 
 
-const clock = document.querySelector('.clock');
-const greeting = document.querySelector('.greeting');
-
+let countSeconds = 0;
+setInterval(() => {
+  updateClock();
+}, 500);
 
 const updateClock = () => {
   if (settings.clock) {
     const now = new Date();
-
     const hours = settings.timeFormat === 12 ? now.getHours() % 12 || 12 : now.getHours();
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const amPm = hours >= 12 ? 'PM' : 'AM';
 
     clock.innerHTML = `${hours}:${minutes} ${amPm}`;
+
+    if (countSeconds > 10 || countSeconds == 0) {
+      const months = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      ];
+      const year = now.getFullYear();
+      const month = months[now.getMonth()];
+      const day = now.getDate().toString().padStart(2, '0');
+      date.innerHTML = `${day} ${month}, ${year}`;
+    }
+    countSeconds++;
+
+
   } else {
     clock.innerHTML = '';
   }
 }
 
-
-setInterval(() => {
-  updateClock();
-}, 500);
-
-
+//////////////////////////////////
+////////// UPDATE GREETING ///////
+//////////////////////////////////
 
 const updateGreeting = () => {
   const now = new Date();
@@ -81,15 +99,9 @@ const updateGreeting = () => {
   }
 }
 
-updateGreeting();
-
-
 //////////////////////////////////
 /////////// TODO LIST ////////////
 //////////////////////////////////
-
-const todoList = document.querySelector('.todo-list');
-// todos.push(todo);
 
 const initializeTodoList = () => {
   todoList.innerHTML = '';
@@ -123,8 +135,6 @@ const initializeTodoList = () => {
 ///////// ADD TODO FORM //////////
 //////////////////////////////////
 
-const addTodoForm = document.querySelector('.add-todo-form');
-
 addTodoForm.addEventListener('submit', e => {
   e.preventDefault();
 
@@ -133,8 +143,7 @@ addTodoForm.addEventListener('submit', e => {
   }
 
   const todo = {
-    // generate unique integer id
-    id: Date.now() ,
+    id: Date.now(),
     text: addTodoForm.todo.value.trim(),
     priority: addTodoForm.priority.value,
     completed: false,
@@ -154,7 +163,7 @@ todoList.addEventListener('click', e => {
   if (e.target.classList.contains('delete-todo') || e.target.closest('.delete-todo')) {
     const todoItem = e.target.closest('.todo-item');
     const id = todoItem.dataset.id;
- 
+
     const index = todos.findIndex(todo => todo.id == id);
     todos.splice(index, 1);
     chrome.storage.sync.set({ todos });
@@ -181,7 +190,6 @@ todoList.addEventListener('change', e => {
 
 // show dialog to edit todo
 
-const showDialogButton = document.querySelectorAll('.edit-todo');
 
 todoList.addEventListener('click', e => {
   if (e.target.classList.contains('edit-todo') || e.target.closest('.edit-todo')) {

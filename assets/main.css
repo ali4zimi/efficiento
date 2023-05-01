@@ -18,16 +18,31 @@
   cursor: pointer;
 }
 
+.content {
+  flex-wrap: wrap;
+  grid-gap: 0px;
+}
+
 .clock {
   width: 100%;
   min-height: 150px;
   text-align: center;
-  font-size: 9em;
 }
 
-.content {
-  flex-wrap: wrap;
-  grid-gap: 0px;
+.clock .time {
+  width: 100%;
+  min-height: 50px;
+  text-align: center;
+  font-size: 9em;
+  color: rgb(52, 61, 63);
+}
+
+.clock .date {
+  width: 100%;
+  min-height: 50px;
+  text-align: center;
+  font-size: 2em;
+  color: rgb(115, 140, 146);
 }
 
 .greeting {
