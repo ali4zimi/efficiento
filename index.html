@@ -13,55 +13,100 @@
 
 <body class="unselectable">
   <button class="reset-button">Reset</button>
-  <div class="content flex justify-center" style="margin-top: 100px;">
-    <div class="container">
-      <div class="clock">
-        <div class="time"></div>
-        <div class="date text-center">
-        </div>
+  <div class="content">
+    <div class="clock">
+      <div class="time"></div>
+      <div class="date text-center">
       </div>
+    </div>
 
-      <div class="" style="margin-top: 100px;">
-        <div class="greeting text-center">
-          Good Morning
-        </div>
+    <div class="greeting-section">
+      Good Morning
+    </div>
 
-        <div class="mt-5">
-          <div class="text-center">
-            <button class="show-dialog-button">Show Todo</button>
-          </div>
-          <ul class="todo-list">
-            <li class="todo-item">
-              <div class="todo-item-text">
-                <input type="checkbox" class="todo-item-checkbox">  
-                Sample Todo afdfdasf
-              </div>
-              <div class="todo-item-tags">
-                <span class="todo-item-tag">Low</span>
-              </div>
-              <div class="todo-item-actions">
-                <button class="todo-item-edit">Edit</button>
-                <button class="todo-item-delete">Delete</button>
-              </div>
-            </li>
-          </ul>
+    <div class="bookmarks-section">
+      Bookmarks
+    </div>
+
+    <div class="focus-section">
+      <div class="tabs flex">
+        <div class="tab-link active" data-target="todo">
           <div>
-            <form class="add-todo-form" autocomplete="off">
-              <input type="text" class="add-todo-input" name="todo" placeholder="Add Todo"
-                class="">
-  
-              <div class="">
-                <!-- <button id="add-todo" class="">Add Todo</button> -->
-                <select name="priority" class="add-todo-priority">
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                </select>
-              </div>
-            </form>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 16 16">
+              <path fill="currentColor" fill-rule="evenodd"
+                d="M3 13.5a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5h9.25a.75.75 0 0 0 0-1.5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9.75a.75.75 0 0 0-1.5 0V13a.5.5 0 0 1-.5.5H3Zm12.78-8.82a.75.75 0 0 0-1.06-1.06L9.162 9.177L7.289 7.241a.75.75 0 1 0-1.078 1.043l2.403 2.484a.75.75 0 0 0 1.07.01L15.78 4.68Z"
+                clip-rule="evenodd" />
+            </svg>
+          </div>
+          <span>Tasks</span>
+        </div>
+        <div class="tab-link" data-target="notes">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M16 14H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2Zm0-4h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Zm4-6h-3V3a1 1 0 0 0-2 0v1h-2V3a1 1 0 0 0-2 0v1H9V3a1 1 0 0 0-2 0v1H4a1 1 0 0 0-1 1v14a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V5a1 1 0 0 0-1-1Zm-1 15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6h2v1a1 1 0 0 0 2 0V6h2v1a1 1 0 0 0 2 0V6h2v1a1 1 0 0 0 2 0V6h2Z" />
+            </svg>
+          </div>
+          <span>Notes</span>
+        </div>
+        <div class="tab-link" data-target="gantt-chart">
+          Gantt Chart
+        </div>
+      </div>
+      <div class="tab-content active" data-target="todo">
+        <form class="add-todo-form" autocomplete="off">
+          <div class="options flex">
+            <div>
+              <select name="priority" class="add-todo-priority">
+                <option value="high">High</option>
+                <option value="medium" selected>Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <input type="text" class="add-todo-input" name="todo" placeholder="Add Todo..." class="">
+          </div>
+          <div class="">
+            <!-- <button class="add-todo-button">Add Todo</button> -->
+          </div>
+        </form>
+
+        <ul class="todo-list">
+          <li class="todo-item">
+            <div class="todo-item-text">
+              <input type="checkbox" class="todo-item-checkbox">
+              Sample Todo
+            </div>
+            <div class="todo-item-tags">
+              <span class="todo-item-tag">Low</span>
+            </div>
+            <div class="todo-item-actions">
+              <button class="todo-item-edit">Edit</button>
+              <button class="todo-item-delete">Delete</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tab-content" data-target="notes">
+        <div class="note-add">
+          <form class="note-add-form">
+            <textarea class="add-note-content" name="content" placeholder="Content"></textarea>
+            <button class="add-note-button">Add Note</button>
+          </form>
+        </div>
+
+        <div class="note-list">
+          <div class="note-item">
+            <div class="note-content">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+            </div>
           </div>
         </div>
       </div>
+
 
     </div>
   </div>

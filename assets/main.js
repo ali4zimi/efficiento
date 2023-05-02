@@ -1,28 +1,20 @@
 // Description: This file contains the main javascript code for the extension
 
 // Get the elements from the DOM
-const clock = document.querySelector('.clock .time');
-const date = document.querySelector('.date');
-const greeting = document.querySelector('.greeting');
 const resetButton = document.querySelector('.reset-button');
+const clockEl = document.querySelector('.clock .time');
+const dateEl = document.querySelector('.date');
+const greetingEl = document.querySelector('.greeting-section');
+const tabLinks = document.querySelectorAll('.tab-link');
+const tabContents = document.querySelectorAll('.tab-content');
 const todoList = document.querySelector('.todo-list');
 const addTodoForm = document.querySelector('.add-todo-form');
 const showDialogButton = document.querySelectorAll('.edit-todo');
 
 
-
-resetButton.addEventListener('click', () => {
-  chrome.storage.sync.set({ settings: defaultSettings });
-  // delete todos
-  chrome.storage.sync.remove('todos');
-  // reload the page
-  window.location.reload();
-});
-
-
 const defaultSettings = {
   clock: true,
-  timeFormat: 12,
+  hour24: true,
   greeting: true,
   wallpaper: true,
   weather: true,
@@ -40,7 +32,7 @@ chrome.storage.sync.get().then(data => {
   }
 
   if (data.todos) {
-    todos.length = 0; // clear the array
+    todos.length = 0;
     todos.push(...data.todos);
   } else {
     chrome.storage.sync.set({ todos });
@@ -48,7 +40,37 @@ chrome.storage.sync.get().then(data => {
   initializeTodoList();
   updateClock();
   updateGreeting();
+  // updateWallpaper();
 });
+
+//////////////////////////////////
+///////// RESET BUTTON ///////////
+//////////////////////////////////
+resetButton.addEventListener('click', () => {
+  chrome.storage.sync.set({ settings: defaultSettings });
+  // delete todos
+  chrome.storage.sync.remove('todos');
+  // reload the page
+  window.location.reload();
+});
+
+//////////////////////////////////
+////// UPDATE WALLPAPER //////////
+//////////////////////////////////
+
+const updateWallpaper = () => {
+  if (settings.wallpaper) {
+    const now = new Date();
+    const hours = now.getHours();
+    const isDayTime = hours > 6 && hours < 20;
+    const url = isDayTime ? 'https://source.unsplash.com/1600x900/?nature,water' : 'https://source.unsplash.com/1600x900/?nature,night';
+    document.body.style.backgroundImage = `url(${url})`;
+    document.body.style.backgroundSize = 'cover';
+  } else {
+    document.body.style.backgroundImage = 'none';
+  } 
+} 
+
 
 
 let countSeconds = 0;
@@ -59,24 +81,33 @@ setInterval(() => {
 const updateClock = () => {
   if (settings.clock) {
     const now = new Date();
-    const hours = settings.timeFormat === 12 ? now.getHours() % 12 || 12 : now.getHours();
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const amPm = hours >= 12 ? 'PM' : 'AM';
+    const time = {
+      "hours": settings.timeFormat === 12 ? now.getHours() % 12 || 12 : now.getHours(),
+      "minutes": now.getMinutes().toString().padStart(2, '0'),
+      "amPm": ''
+    }
 
-    clock.innerHTML = `${hours}:${minutes} ${amPm}`;
+    if (!settings.hour24) {
+      time.amPm = now.getHours() >= 12 ? 'PM' : 'AM';
+    } else {
+      time.amPm = '';
+    }
+
+    clockEl.innerHTML = `${time.hours}:${time.minutes} ${time.amPm}`;
 
     if (countSeconds > 10 || countSeconds == 0) {
       const months = [
         'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
       ];
-      const year = now.getFullYear();
-      const month = months[now.getMonth()];
-      const day = now.getDate().toString().padStart(2, '0');
-      date.innerHTML = `${day} ${month}, ${year}`;
+
+      const date = {
+        "year": now.getFullYear(),
+        "month": months[now.getMonth()],
+        "day": now.getDate().toString().padStart(2, '0')
+      }
+      dateEl.innerHTML = `${date.month} ${date.day}, ${date.year}`;
     }
     countSeconds++;
-
-
   } else {
     clock.innerHTML = '';
   }
@@ -91,13 +122,37 @@ const updateGreeting = () => {
   const hours = now.getHours();
 
   if (hours < 12) {
-    greeting.innerHTML = 'Good Morning';
+    greetingEl.innerHTML = 'Good Morning';
   } else if (hours < 18) {
-    greeting.innerHTML = 'Good Afternoon';
+    greetingEl.innerHTML = 'Good Afternoon';
   } else {
-    greeting.innerHTML = 'Good Evening';
+    greetingEl.innerHTML = 'Good Evening';
   }
 }
+
+//////////////////////////////////
+////////// TAB MANAGEMENT ////////
+//////////////////////////////////
+
+tabLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    tabLinks.forEach(link => link.classList.remove('active'));
+    link.classList.add('active');
+
+    const target = link.dataset.target;
+    tabContents.forEach(content => {
+      if (content.dataset.target === target) {
+        content.classList.add('active');
+      } else {
+        content.classList.remove('active');
+      }
+    });
+  });
+});
+
+
+
+
 
 //////////////////////////////////
 /////////// TODO LIST ////////////
