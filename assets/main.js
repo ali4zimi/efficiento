@@ -11,6 +11,33 @@ const todoList = document.querySelector('.todo-list');
 const addTodoForm = document.querySelector('.add-todo-form');
 const showDialogButton = document.querySelectorAll('.edit-todo');
 
+const noteList = document.querySelector('.note-list');
+const addNoteForm = document.querySelector('.add-note-form');
+
+addNoteForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  let note = {
+    "content": addNoteForm.content.value
+  }
+  notes.push(note);
+  chrome.storage.sync.set({ notes });
+  addNoteForm.content.value = '';
+  renderNoteList();
+});
+
+const renderNoteList = () => {
+  console.log(notes)
+  noteList.innerHTML = '';
+
+  notes.forEach((note) => {
+    const noteEl = document.createElement('li');
+    noteEl.classList.add('note-item')
+    noteEl.innerHTML = `<div class="note-content">
+          ${note.content}
+          </div>`;
+    noteList.append(noteEl);
+  });
+}
 
 const defaultSettings = {
   clock: true,
@@ -18,10 +45,12 @@ const defaultSettings = {
   greeting: true,
   wallpaper: true,
   weather: true,
+  defaultTab: 'todos',
 };
 
 const settings = {};
 const todos = [];
+const notes = [];
 
 chrome.storage.sync.get().then(data => {
   if (data.settings) {
@@ -37,10 +66,22 @@ chrome.storage.sync.get().then(data => {
   } else {
     chrome.storage.sync.set({ todos });
   }
-  initializeTodoList();
+
+  if (data.notes) {
+    notes.length = 0;
+    notes.push(...data.notes);
+  } else {
+    chrome.storage.sync.set({ notes });
+  }
+
   updateClock();
   updateGreeting();
   // updateWallpaper();
+  tabManager.init();
+  initializeTodoList();
+  renderNoteList();
+
+  document.body.classList.remove('hidden')
 });
 
 //////////////////////////////////
@@ -50,6 +91,8 @@ resetButton.addEventListener('click', () => {
   chrome.storage.sync.set({ settings: defaultSettings });
   // delete todos
   chrome.storage.sync.remove('todos');
+  // delete notes
+  chrome.storage.sync.remove('notes');
   // reload the page
   window.location.reload();
 });
@@ -68,8 +111,8 @@ const updateWallpaper = () => {
     document.body.style.backgroundSize = 'cover';
   } else {
     document.body.style.backgroundImage = 'none';
-  } 
-} 
+  }
+}
 
 
 
@@ -134,25 +177,45 @@ const updateGreeting = () => {
 ////////// TAB MANAGEMENT ////////
 //////////////////////////////////
 
-tabLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    tabLinks.forEach(link => link.classList.remove('active'));
-    link.classList.add('active');
-
-    const target = link.dataset.target;
-    tabContents.forEach(content => {
-      if (content.dataset.target === target) {
-        content.classList.add('active');
-      } else {
-        content.classList.remove('active');
-      }
+const tabManager = {
+  init() {
+    // activate user definded tab
+    tabLinks.forEach(link => {
+      tabLinks.forEach(link => {
+        if (link.dataset.target === settings.defaultTab) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+      tabContents.forEach(content => {
+        if (content.dataset.target === settings.defaultTab) {
+          content.classList.add('active');
+        } else {
+          content.classList.remove('active');
+        }
+      });
     });
-  });
-});
+
+    tabLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        tabLinks.forEach(link => link.classList.remove('active'));
+        link.classList.add('active');
+        const target = link.dataset.target;
+        tabContents.forEach(content => {
+          if (content.dataset.target === target) {
+            content.classList.add('active');
+          } else {
+            content.classList.remove('active');
+          }
+        });
+      });
+    });
+  },
 
 
 
-
+}
 
 //////////////////////////////////
 /////////// TODO LIST ////////////
@@ -282,3 +345,8 @@ const createDialog = () => {
   document.body.appendChild(dialog);
 }
 
+
+
+//////////////////////////////////
+//////// BOOKMARK MANAGER ////////
+//////////////////////////////////

@@ -256,32 +256,19 @@
   font-size: 1.2em;
 }
 
-.note-add {
+.add-note {
   width: 100%;
   margin-bottom: 20px;
   align-items: center;
 }
 
-.note-add-form {
+.add-note-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.note-add-form input {
-  /* background-color: transparent; */
-  width: 100%;
-  padding: 10px 10px;
-  border-bottom: 1px solid #ccc;  
-  background-color: white;
-  border-radius: 10px;
-  flex-grow: 1;
-  border: none;
-  outline: none;
-  font-size: 1.5em;
-}
-
-.note-add-form textarea {
+.add-note-form textarea {
   /* background-color: transparent; */
   width: 100%;
   padding: 10px 10px;
@@ -294,4 +281,14 @@
   font-size: 1.5em;
   resize: none;
   height: 100px;
+}
+
+.add-note-button {
+  width: fit-content;
+  padding: 10px 15px;
+  color: white;
+  background-color: #c4c5c4;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
