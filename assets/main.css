@@ -57,9 +57,8 @@
   color: rgb(95, 95, 95);
 }
 
-.focus-section {
+.section {
   position: relative;
-  min-height: 300px;
   padding: 10px;
   background: #f2f2f2;
   margin-top: 40px;
@@ -67,10 +66,15 @@
   overflow: hidden;
 }
 
+.focus-section {
+  min-height: 300px;
+}
+
 .tabs {
   display: flex;
   gap: 2px;
   height: 40px;
+  border-bottom: 1.3px solid #b3b2b2;
   /* border-radius: 10px; */
 }
 
@@ -105,7 +109,6 @@
 .tab-content {
   width: 100%;
   padding: 10px 0px;
-  border-top: 1.3px solid #b3b2b2;
   display: none;
 }
 
@@ -292,3 +295,149 @@
   border-radius: 10px;
   cursor: pointer;
 }
+
+.matrix {
+  display: grid;
+  gap: 10px;
+}
+
+.cell {
+  width: 100%;
+  min-height: 200px;
+  padding: 10px;
+  /* aspect-ratio: 1/1; */
+  
+  border-radius: 10px;
+
+}
+
+.column-header {
+  grid-column-start: 0;
+  grid-column-end: 0;
+}
+
+.cell1 {
+  background-color: #bceebe;
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.cell2 {
+  background-color: rgb(192, 224, 244);
+  grid-column-start: 2;
+  grid-row-start: 1;
+}
+
+.cell3 {
+  background-color: rgba(255, 255, 0, 0.379);
+  grid-column-start: 1;
+  grid-row-start: 2;
+}
+
+.cell4 {
+  background-color: rgba(255, 0, 0, 0.128);
+  
+  grid-column-start: 2;
+  grid-row-start: 2;
+}
+
+
+.bookmark-section {
+  min-height: fit-content;
+}
+
+.ribbon-marker {
+}
+
+.ribbon-marker-title {
+  text-align: center;
+}
+
+.ribbon-marker-content {
+  position: relative;
+  background: #f2f2f2;
+  border-radius: 10px;
+  overflow: hidden;
+  /* border: 1px solid #ccc; */
+}
+
+.marker-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.marker-item {
+  position: relative;
+  padding: 10px;
+}
+
+.marker-item-wrapper {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.marker-item:hover .marker-item-wrapper {
+  background-color: #fcfcfc91;
+}
+
+.marker-item:hover .marker-remove-button {
+  visibility: visible;
+}
+
+.marker-icon {
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marker-icon img {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+}
+
+.marker-item-title {
+  width: 100%;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marker-remove-button {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #f7c4c4;
+  color: white;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.marker-remove-button:hover {
+  background-color: #f76666c7;
+}
+

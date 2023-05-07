@@ -1,0 +1,40 @@
+body {
+  min-width: 200px;
+  margin: 0;
+}
+
+.title {
+  padding: 10px;
+  background: #9a98f6;
+  color: #fff;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  padding: 5px 10px;
+  background: #8b8989;
+  color: #fff;
+  text-align: center;
+  border-bottom: 1px solid #fff;
+  cursor: pointer;
+}
+
+ul li:hover {
+  background: #808082;
+}
+
+.pop-up-menu {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  padding: 5px 0;
+  z-index: 1000;
+}

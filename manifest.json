@@ -4,14 +4,17 @@
   "description": "Track your activity and increase your effeciency",
   "version": "1.0",
   "action": {
-    "default_popup": "contextMenu.html",
-    "default_icon": "icon.ico"
+    "default_popup": "popupMenu.html",
+    "default_icon": "assets/icon.png"
   },
 
   "chrome_url_overrides" : {
     "newtab": "index.html"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "bookmarks",
+    "tabs",
+    "notifications"
   ]
 }

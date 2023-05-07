@@ -26,7 +26,6 @@ addNoteForm.addEventListener('submit', (e) => {
 });
 
 const renderNoteList = () => {
-  console.log(notes)
   noteList.innerHTML = '';
 
   notes.forEach((note) => {
@@ -45,7 +44,7 @@ const defaultSettings = {
   greeting: true,
   wallpaper: true,
   weather: true,
-  defaultTab: 'todos',
+  defaultTab: 'eh-matrix',
 };
 
 const settings = {};
@@ -74,12 +73,21 @@ chrome.storage.sync.get().then(data => {
     chrome.storage.sync.set({ notes });
   }
 
+  if (data.markers) {
+    markers.length = 0;
+    markers.push(...data.markers);
+  } else {
+    chrome.storage.sync.set({ markers });
+  }
+
   updateClock();
   updateGreeting();
   // updateWallpaper();
   tabManager.init();
   initializeTodoList();
   renderNoteList();
+
+  renderMarkers();
 
   document.body.classList.remove('hidden')
 });
@@ -93,6 +101,8 @@ resetButton.addEventListener('click', () => {
   chrome.storage.sync.remove('todos');
   // delete notes
   chrome.storage.sync.remove('notes');
+  // delete markers
+  chrome.storage.sync.remove('markers');
   // reload the page
   window.location.reload();
 });
@@ -109,6 +119,7 @@ const updateWallpaper = () => {
     const url = isDayTime ? 'https://source.unsplash.com/1600x900/?nature,water' : 'https://source.unsplash.com/1600x900/?nature,night';
     document.body.style.backgroundImage = `url(${url})`;
     document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundAttachment = 'fixed';
   } else {
     document.body.style.backgroundImage = 'none';
   }
@@ -350,3 +361,75 @@ const createDialog = () => {
 //////////////////////////////////
 //////// BOOKMARK MANAGER ////////
 //////////////////////////////////
+
+const bookmarks = [];
+
+chrome.bookmarks.getTree(tree => {
+  const bookmarksBar = tree[0].children[0].children;
+  const otherBookmarks = tree[0].children[1].children;
+
+  bookmarksBar.forEach(bookmark => {
+    bookmarks.push(bookmark);
+  });
+
+  otherBookmarks.forEach(bookmark => {
+    bookmarks.push(bookmark);
+  });
+
+  console.log(bookmarks);
+});
+
+
+
+//////////////////////////////////
+///////// MARKER MANAGER /////////
+//////////////////////////////////
+
+const markersListEl = document.getElementById('markerList');
+const markers = [];
+
+
+const renderMarkers = () => {
+  markersListEl.innerHTML = '';
+
+  markers.forEach(marker => {
+    const markerEl = document.createElement('li');
+    markerEl.classList.add('marker-item');
+    markerEl.dataset.id = marker.url;
+    // add title
+    markerEl.title = marker.url;
+    markerEl.innerHTML = `
+          <div class="marker-item-wrapper">
+            <div class="marker-icon">
+              <img src="https://www.google.com/s2/favicons?domain=${marker.url}" alt="icon">
+            </div>
+            <div class="marker-item-title" title="${marker.title}">
+              <span>${marker.title}</span>
+            </div>
+            <div class="marker-remove-button">
+              X
+            </div>
+          </div>
+      `;
+    markersListEl.appendChild(markerEl);
+    markerEl.addEventListener('click', e => {
+      if (e.target.classList.contains('marker-remove-button')) {
+        const markerItem = e.target.closest('.marker-item');
+        const id = markerItem.dataset.id;
+        const index = markers.findIndex(marker => marker.url === id);
+        markers.splice(index, 1);
+        chrome.storage.sync.set({ markers });
+        renderMarkers();
+      }
+      else {
+        chrome.tabs.create({ url: marker.url });
+      }
+    });
+
+  });
+
+
+
+}
+
+

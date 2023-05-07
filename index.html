@@ -15,24 +15,61 @@
 <body class="unselectable hidden">
   <button class="reset-button">Reset</button>
   <div class="content">
-    <div class="clock">
+
+    <div class="section clock">
       <div class="time"></div>
       <div class="date text-center">
       </div>
+      <div class="greeting-section">
+        Good Morning
+      </div>
     </div>
 
-    <div class="greeting-section">
-      Good Morning
+    <div class="section bookmark-section">
+      <div class="tabs flex">
+        <div class="tab-link" data-target="bookmarks">
+          <div class="tab-icon">
+          </div>
+          <span>Bookmarks</span>
+        </div>
+        <div class="tab-link" data-target="markers">
+          <div class="tab-icon">
+
+          </div>
+          <div>Ribbon Markers</div>
+        </div>
+      </div>
+
+      <div class="tab-content" data-target="bookmarks">
+        Bookmarks
+      </div>
+      <div class="tab-content" data-target="markers">
+        <div class="ribbon-marker">
+          <div class="ribbon-marker-content">
+            <ul id="markerList" class="marker-list">
+              <li class="marker-item-wrapper">
+                <div class="marker-item">
+                  <div class="marker-icon">
+                    Icon
+                  </div>
+                  <div class="marker-item-title" title="">Title </div>
+                  <div class="marker-remove-button">
+                    X
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="bookmarks-section">
-      Bookmarks
-    </div>
 
-    <div class="focus-section">
+
+    <div class="section focus-section">
       <div class="tabs flex">
         <div class="tab-link" data-target="todos">
-          <div>
+          <div class="tab-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 16 16">
               <path fill="currentColor" fill-rule="evenodd"
                 d="M3 13.5a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5h9.25a.75.75 0 0 0 0-1.5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9.75a.75.75 0 0 0-1.5 0V13a.5.5 0 0 1-.5.5H3Zm12.78-8.82a.75.75 0 0 0-1.06-1.06L9.162 9.177L7.289 7.241a.75.75 0 1 0-1.078 1.043l2.403 2.484a.75.75 0 0 0 1.07.01L15.78 4.68Z"
@@ -41,8 +78,14 @@
           </div>
           <span>Tasks</span>
         </div>
+        <div class="tab-link" data-target="eh-matrix">
+          <div class="tab-icon">
+
+          </div>
+          <div>Tasks Matrix</div>
+        </div>
         <div class="tab-link" data-target="notes">
-          <div>
+          <div class="tab-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
               <path fill="currentColor"
                 d="M16 14H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2Zm0-4h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Zm4-6h-3V3a1 1 0 0 0-2 0v1h-2V3a1 1 0 0 0-2 0v1H9V3a1 1 0 0 0-2 0v1H4a1 1 0 0 0-1 1v14a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V5a1 1 0 0 0-1-1Zm-1 15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6h2v1a1 1 0 0 0 2 0V6h2v1a1 1 0 0 0 2 0V6h2v1a1 1 0 0 0 2 0V6h2Z" />
@@ -51,7 +94,7 @@
           <span>Notes</span>
         </div>
         <div class="tab-link" data-target="gantt-chart">
-          <div>
+          <div class="tab-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
               <path fill="currentColor"
                 d="M2 5h8V2h2v20h-2v-4H6v-3h4v-2H4v-3h6V8H2V5m12 0h3v3h-3V5m0 5h5v3h-5v-3m0 5h8v3h-8v-3Z" />
@@ -62,7 +105,10 @@
           </div>
         </div>
       </div>
-      <div class="tab-content active" data-target="todos">
+
+
+
+      <div class="tab-content" data-target="todos">
         <form class="add-todo-form" autocomplete="off">
           <div class="options flex">
             <div>
@@ -96,6 +142,33 @@
             </div>
           </li>
         </ul>
+      </div>
+
+      <div class="tab-content" data-target="eh-matrix">
+        <div>
+          The Eisenhower matrix is a better way of prioritizing your tasks based on their importancy and urgency
+        </div>
+        <div class="matrix">
+          <div class="cell column-header">
+            Urgent
+          </div>
+          <div class="cell row-header">
+            Important
+          </div>
+          <div class="cell cell1">
+            Important, Urgent
+          </div>
+          <div class="cell cell2">
+            Important, Not Urgent
+          </div>
+          <div class="cell cell3">
+            Not Important, Urgent
+          </div>
+          <div class="cell cell4">
+            Not Important, Not Urgent
+          </div>
+
+        </div>
       </div>
 
       <div class="tab-content" data-target="notes">
