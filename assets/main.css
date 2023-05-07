@@ -346,6 +346,24 @@
   min-height: fit-content;
 }
 
+.bookmark-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  margin: 0;
+  list-style: none;
+  gap: 10px;
+}
+
+.bookmark-item {
+  width: 100px;
+  height: 100px;
+  background: #bceebe;
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .ribbon-marker {
 }
 

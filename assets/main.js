@@ -376,9 +376,38 @@ chrome.bookmarks.getTree(tree => {
     bookmarks.push(bookmark);
   });
 
-  console.log(bookmarks);
+  renderBookmarks();
+
 });
 
+const bookmarksListEl = document.getElementById('bookmarkList');
+
+const renderBookmarks = () => {
+  bookmarksListEl.innerHTML = '';
+
+  bookmarks.forEach(bookmark => {
+    const bookmarkEl = document.createElement('li');
+    bookmarkEl.classList.add('bookmark-item');
+    bookmarkEl.dataset.id = bookmark.id;
+    // add title
+    bookmarkEl.title = bookmark.title;
+    bookmarkEl.innerHTML = `
+          <div class="bookmark-item-wrapper">
+            <div class="bookmark-icon">
+              <img src="https://www.google.com/s2/favicons?domain=${bookmark.url}" alt="icon">
+            </div>
+            <div class="bookmark-item-title" title="${bookmark.title}">
+              <span>${bookmark.title}</span>
+            </div>
+            <div class="bookmark-remove-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.413-.588T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.588 1.413T17 21H7Zm2-4h2V8H9v9Zm4 0h2V8h-2v9Z"/></svg>
+            </div>
+          </div>
+        `;
+
+    bookmarksListEl.appendChild(bookmarkEl);
+  });
+}
 
 
 //////////////////////////////////
