@@ -16,12 +16,12 @@ The notes section is where you can add, edit, and delete notes. You can add a no
 The Gantt chart is a chart that shows the progress of your tasks. It is a simple chart that shows the progress of your tasks in a bar graph. The Gantt chart is located at the bottom left of the screen.
 
 ## Installation
-Download the project, in your Chrome browser, and open `extensions`. Then, click on the `load unpacked`, and browse for the project dir and select it.
+Download the project, in your Chrome browser, and open `extensions`. Then, click on the `load unpacked`, browse for the project dir, and select it.
 
 This project is not completed and still needs contributions. Feel free to fork and pull request, and bring changes.
 
-### I need your help, I want to make live this project and uploaded it to the Chrome store.
+#### I need your help, I want to make this project live and upload it to the Chrome store.
 
-<a href="https://www.buymeacoffee.com/azimi.ali" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/azimi.ali" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 50px !important;width: 200px !important;" ></a>
 
-Thanks in advance
+###Thanks in advance
