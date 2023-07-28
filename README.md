@@ -20,8 +20,8 @@ Download the project, in your Chrome browser, and open `extensions`. Then, click
 
 This project is not completed and still needs contributions. Feel free to fork and pull request, and bring changes.
 
-#### I need your help, I want to make this project live and upload it to the Chrome store.
+[//]: <> (#### I need your help, I want to make this project live and upload it to the Chrome store.)
 
-<a href="https://www.buymeacoffee.com/azimi.ali" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 50px !important;width: 200px !important;" ></a>
+[//]: <> (<a href="https://www.buymeacoffee.com/azimi.ali" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 50px !important;width: 200px !important;" ></a>)
 
-### Thanks in advance
+[//]: <> (### Thanks in advance)
