@@ -1,4 +1,4 @@
-# Efficiento Extention (Beta)
+# Efficiento Extention (In Development)
 
 ### Description
 This app is a Chrome extension that helps you organize your daily tasks and goals. It is a simple and easy-to-use app that will help you stay on track and get things done.
